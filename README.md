@@ -6,6 +6,7 @@ CPU.circ is the version before implementing the memory device bus, CPU_2.circ is
 
 ## Instructions
 Instructions consist of an 8 bit argument followed by the 8 bit command. The usage of the argument depends on the context.
+For example, the instruction to load the value 0x34 into the accumulator is 0x3481.
 
 ### List of instructions (HEX)
 | Instruction | Assembler | Description                                                                                                                                                                                                   |
