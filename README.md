@@ -8,7 +8,7 @@ CPU.circ is the version before implementing the memory device bus, CPU_2.circ is
 Instructions consist of an 8 bit argument followed by the 8 bit command. The usage of the argument depends on the context.
 
 ### List of instructions (HEX)
-| Instruction | Assembler command | Description                                                                                                                                                                                                   |
+| Instruction | Assembler | Description                                                                                                                                                                                                   |
 |-------------|-------------------|---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | 0x01        | accl              | Accumulator load (from memory device). The argument is the address.                                                                                                                                           |
 | 0x81        | iaccl             | Accumulator load (immediate). The argument is the value to load.                                                                                                                                              |
