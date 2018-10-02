@@ -41,14 +41,14 @@ For example, the instruction to load the value 0x34 into the accumulator is 0x34
 |      | 0x25 | ne       | Skip if (cache 0 != cache 1) |                                   | ne            | 3/2   |
 |      | 0x26 | leq      | Skip if (cache 0 <= cache 1) |                                   | leq           | 3/2   |
 |      | 0x27 | true     | Skip if (true)               | Always skips                      |               | 3     |
-|      | 0x60 | false    |                              |                                   |               | 2     |
-|      | 0x61 | ugr      |                              | Unsigned                          | ugr           | 3/2   |
-|      | 0x62 | ueq      |                              |                                   | ueq           | 3/2   |
-|      | 0x63 | uge      |                              |                                   | uge           | 3/2   |
-|      | 0x64 | ule      |                              |                                   | ule           | 3/2   |
-|      | 0x65 | une      |                              |                                   | une           | 3/2   |
-|      | 0x66 | uleq     |                              |                                   | uleq          | 3/2   |
-|      | 0x67 | true     |                              |                                   |               | 3     |
+|      | 0xa0 | false    |                              |                                   |               | 2     |
+|      | 0xa1 | ugr      |                              | Unsigned                          | ugr           | 3/2   |
+|      | 0xa2 | ueq      |                              |                                   | ueq           | 3/2   |
+|      | 0xa3 | uge      |                              |                                   | uge           | 3/2   |
+|      | 0xa4 | ule      |                              |                                   | ule           | 3/2   |
+|      | 0xa5 | une      |                              |                                   | une           | 3/2   |
+|      | 0xa6 | uleq     |                              |                                   | uleq          | 3/2   |
+|      | 0xa7 | true     |                              |                                   |               | 3     |
 | 0x28 | 0x28 | jmp      | Jump                         | Address saved in register         | jmp r0        | 4     |
 |      | 0xa8 | ijmp     |                              | Immediate                         | ijmp d0        | 4     |
 | 0x00 | 0x00 | drp      | Do nothing                   | Does nothing                      |               | 2     |
