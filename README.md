@@ -50,5 +50,5 @@ For example, the instruction to load the value 0x34 into the accumulator is 0x34
 |      | 0x66 | uleq     |                              |                                   | uleq          | 3/2   |
 |      | 0x67 | true     |                              |                                   |               | 3     |
 | 0x28 | 0x28 | jmp      | Jump                         | Address saved in register         | jmp r0        | 4     |
-|      | 0xa8 | ijmp     |                              | Immediate                         | jmp d0        | 4     |
+|      | 0xa8 | ijmp     |                              | Immediate                         | ijmp d0        | 4     |
 | 0x00 | 0x00 | drp      | Do nothing                   | Does nothing                      |               | 2     |
