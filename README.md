@@ -9,33 +9,46 @@ Instructions consist of an 8 bit argument followed by the 8 bit command. The usa
 For example, the instruction to load the value 0x34 into the accumulator is 0x3481.
 
 ### List of instructions (HEX)
-| Instruction | Assembler | Description                                                                                                                                                                                                   |
-|-------------|-------------------|---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| 0x01        | accl              | Accumulator load (from memory device). The argument is the address.                                                                                                                                           |
-| 0x81        | iaccl             | Accumulator load (immediate). The argument is the value to load.                                                                                                                                              |
-| 0x03        | accw              | Accumulator write on bus (to address stored in memory). The argument is the address of the address.                                                                                                           |
-| 0x83        | iaccw             | Accumulator write on bus (to address specified in the argument).                                                                                                                                              |
-| 0x04        | add               | Arithmetic ADD (from memory device). Adds a value to the accumulator. The argument is the address of the value.                                                                                               |
-| 0x84        | iadd              | Arithmetic ADD (immediate). Adds the argument to the accumulator.                                                                                                                                             |
-| 0x05        | sub               | Arithmetic SUB (from memory device). Subtracts a value from the accumulator. The argument is the address of the value.                                                                                        |
-| 0x85        | isub              | Arithmetic SUB (immediate). Subtracts the argument from the accumulator.                                                                                                                                      |
-| 0x06        | mul               | Arithmetic MUL (from memory device). Multiplies the accumulator with a value. The argument is the address of the value.                                                                                       |
-| 0x86        | imul              | Arithmetic MUL (immediate). Multiplies the accumulator with the argument.                                                                                                                                     |
-| 0x07        | div               | Arithmetic DIV (from memory device). Divides the accumulator by a value. The argument is the address of the value.                                                                                            |
-| 0x87        | idiv              | Arithmetic DIV (immediate). Divides the accumulator by the argument.                                                                                                                                          |
-| 0x08        | ipset             | Set instruction pointer (from memory device). Sets the instruction pointer to a value. The argument is the address of the value.                                                                              |
-| 0x88        | iipset            | Set instruction pointer (immediate). Sets the instruction pointer to the argument.                                                                                                                            |
-| 0x09        | aipset            | Set instruction pointer (from accumulator). Sets the instruction pointer to the value stored in the accumulator. The argument is ignored.                                                                     |
-| 0x0a        | and               | Logical AND (from memory device). Executes a bitwise AND operation on the accumulator. The argument is the address.                                                                                           |
-| 0x8a        | iand              | Logical AND (immediate). Executes a bitwise AND operation on the accumulator. The argument is the value.                                                                                                      |
-| 0x0b        | or                | Logical OR (from memory device). Executes a bitwise OR operation on the accumulator. The argument is the address.                                                                                             |
-| 0x8b        | ior               | Logical OR (immediate). Executes a bitwise OR operation on the accumulator. The argument is the value.                                                                                                        |
-| 0x0c        | xor               | Logical XOR (from memory device). Executes a bitwise XOR operation on the accumulator. The argument is the address.                                                                                           |
-| 0x8c        | ixor              | Logical XOR (immediate). Executes a bitwise XOR operation on the accumulator. The argument is the value.                                                                                                      |
-| 0x0d        | ainv              | Invert accumulator. Executes a bitwise invert operation on the accumulator. The argument is ignored.                                                                                                          |
-| 0x0e        | less              | Conditional skip if ACC < VALUE (from memory device). Skips the next instruction if the value stored in the accumulator is less than the value provided by the memory device. The argument is the address.    |
-| 0x8e        | iless             | Conditional skip if ACC < VALUE (immediate). Skips the next instruction if the value stored in the accumulator is less than the value provided in the argument.                                               |
-| 0x0f        | eq                | Conditional skip if ACC == VALUE (from memory device). Skips the next instruction if the value stored in the accumulator is equal to the value provided by the memory device. The argument is the address.    |
-| 0x8f        | ieq               | Conditional skip if ACC == VALUE (immediate). Skips the next instruction if the value stored in the accumulator is equal to the value provided in the argument.                                               |
-| 0x10        | great             | Conditional skip if ACC > VALUE (from memory device). Skips the next instruction if the value stored in the accumulator is greater than the value provided by the memory device. The argument is the address. |
-| 0x90        | igreat            | Conditional skip if ACC > VALUE (immediate). Skips the next instruction if the value stored in the accumulator is greater than the value provided in the argument.                                            |
+| Base | HEX  | Assembly | Short name                   | Additional information            | Usage example     | Ticks |
+|------|------|----------|------------------------------|-----------------------------------|-------------------|-------|
+| 0x08 | 0x08 | cload0   | Cache 0 load                 | From memory address               | cload0 <addr>     | 4     |
+|      | 0x09 | cload1   | Cache 1 load                 |                                   | cload1 <addr>     | 4     |
+|      | 0x88 | icload0  | Cache 0 load                 | Immediate                         | icload0 <data>    | 3     |
+|      | 0x89 | icload1  | Cache 1 load                 |                                   | icload1 <data>    | 3     |
+| 0x10 | 0x10 | add      | Add to memory                | Cache 0 + Cache 1                 | add <addr>        | 4     |
+|      | 0x11 | sub      | Sub to memory                |                                   | sub <addr>        | 4     |
+|      | 0x12 | mul      | Mul to memory                |                                   | mul <addr>        | 4     |
+|      | 0x13 | div      | Div to memory                |                                   | div <addr>        | 4     |
+|      | 0x14 | and      | Bitwise And to memory        | Cache 0 AND Cache 1               | and <addr>        | 4     |
+|      | 0x15 | or       | Bitwise Or to memory         |                                   | or <addr>         | 4     |
+|      | 0x16 | xor      | Bitwise Xor to memory        |                                   | xor <addr>        | 4     |
+|      | 0x17 | inv      | Invert cache 0 to memory     | NOT cache 0                       | inv <addr>        | 4     |
+|      | 0x90 | addc     | Add to cache 0               | Replaces existing data in cache 0 | addc              | 3     |
+|      | 0x91 | subc     | Sub to cache 0               |                                   | subc              | 3     |
+|      | 0x92 | mulc     | Mul to cache 0               |                                   | mulc              | 3     |
+|      | 0x93 | divc     | Div to cache 0               |                                   | divc              | 3     |
+|      | 0x94 | andc     | Bitwise And to cache 0       |                                   | andc              | 3     |
+|      | 0x95 | orc      | Bitwise Or to cache 0        |                                   | orc               | 3     |
+|      | 0x96 | xorc     | Bitwise Xor to cache 0       |                                   | xorc              | 3     |
+|      | 0x97 | invc     | Invert cache 0 to cache 0    |                                   | invc              | 3     |
+| 0x18 | 0x18 | mov      | Copy data                    | Register to register              | mov <src> <dst>   | 7     |
+|      | 0x98 | imov     | Copy data                    | Immediate                         | imov <data> <dst> | 6     |
+| 0x20 | 0x20 | false    | Skip if (false)              | Never skips                       |                   | 2     |
+|      | 0x21 | gr       | Skip if (cache 0 > cache 1)  | Signed. Skips two instructions    | gr                | 3/2   |
+|      | 0x22 | eq       | Skip if (cache 0 == cache 1) |                                   | eq                | 3/2   |
+|      | 0x23 | ge       | Skip if (cache 0 >= cache 1) |                                   | ge                | 3/2   |
+|      | 0x24 | le       | Skip if (cache 0 < cache 1)  |                                   | le                | 3/2   |
+|      | 0x25 | ne       | Skip if (cache 0 != cache 1) |                                   | ne                | 3/2   |
+|      | 0x26 | leq      | Skip if (cache 0 <= cache 1) |                                   | leq               | 3/2   |
+|      | 0x27 | true     | Skip if (true)               | Always skips                      |                   | 3     |
+|      | 0x60 | false    |                              |                                   |                   | 2     |
+|      | 0x61 | ugr      |                              | Unsigned                          | ugr               | 3/2   |
+|      | 0x62 | ueq      |                              |                                   | ueq               | 3/2   |
+|      | 0x63 | uge      |                              |                                   | uge               | 3/2   |
+|      | 0x64 | ule      |                              |                                   | ule               | 3/2   |
+|      | 0x65 | une      |                              |                                   | une               | 3/2   |
+|      | 0x66 | uleq     |                              |                                   | uleq              | 3/2   |
+|      | 0x67 | true     |                              |                                   |                   | 3     |
+| 0x28 | 0x28 | jmp      | Jump                         | Address saved in register         | jmp <src>         | 4     |
+|      | 0xa8 | ijmp     |                              | Immediate                         | jmp <addr>        | 4     |
+| 0x00 | 0x00 | drp      | Do nothing                   | Does nothing                      |                   | 2     |
